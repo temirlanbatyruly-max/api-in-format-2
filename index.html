@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+</head>
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 50px;
+        font-family: sans-serif;
+        background-color: rgb(57, 0, 110);
+    }
+    .currency {
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 50px;
+        border-radius: 10px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .btn-convert {
+        background-color: rgb(242, 242, 0);
+        padding: 20px;
+        border-radius: 50px;
+        border: 2px solid orange;
+        font-size: 20px;
+        font-weight: 600;
+        transition: 0.2s ease;
+        cursor: pointer;
+    }
+    input {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+    }
+    .first-value {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    select {
+        border: none;
+        color: white;
+        outline: none;
+        font-size: 18px;
+        background-color: transparent;
+        font-weight: 600;
+    }
+    .second-value {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .convert-icon {
+        padding: 10px;
+        width: 22px;
+        height: 22px;
+        background-color: orange;
+        border-radius: 50px;
+        transition: 0.1s ease;
+        cursor: pointer;
+    }
+    .convert-icon:active {
+        transition: 0.1s ease;
+        transform: scale(0.95);
+    }
+    .output {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        padding: 10px;
+    }
+    .btn-convert:hover {
+        opacity: 0.8;
+        transition: 0.2s ease;
+    }
+    .first-country, .second-country {
+        width: 30px;
+        height: 30px;
+        border-radius: 100px;
+        object-fit: cover;
+    }
+    option {
+        background-color: black;
+    }
+    .main-container {
+        padding: 50px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px -15px black;
+        width: 100%;
+        background: linear-gradient(to bottom, #AD9FF0, white, white);
+    }
+    .pokemon {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        width: 30%;
+    }
+    .pokemon-btn {
+        background-color: black;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        width: 150px;
+        font-size: 16px;
+        padding: 15px;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+    .pokemon-btn:hover {
+        opacity: 0.8;
+        transition: 0.2s ease;
+    }
+    .attack, .defense, .speed {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .stats {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .num1, .num2, .num3 {
+        font-weight: 700;
+    }
+    .attack-text, .defense-text, .speed-text {
+        color: #9d9fa2;
+    }
+    .num1, .num2, .num3, .attack-text, .defense-text, .speed-text {
+        margin: 0;
+    }
+    .twopi {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .first, .second {
+        padding-left: 15px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-right: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        border-radius: 50px;
+        background-color: #AD9FF0;
+    }
+    .img-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .name {
+        text-align: center;
+        font-size: 24px;
+        text-transform: capitalize;
+    }
+    .hp-text {
+        background-color: white;
+        padding: 10px;
+        border-radius: 50px;
+    }
+    .hp {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+    }
+    img {
+        width: 200px;
+    }
+    .quote {
+        background-color: #FF453F;
+        box-shadow: 0 0 30px -10px black;
+        border-radius: 10px;
+        width: 300px;
+        height: fit-content;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .quote-btn {
+        background-color: white;
+        border: none;
+        color: #FF453F;
+        font-weight: 600;
+        font-size: 16px;
+        padding: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        color: white;
+    }
+    p {
+        margin: 0;
+        font-weight: 100;
+    }
+
+    .main-1 {
+        color: white;
+        font-size: 40px;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        color: white;
+        background-color: black;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px -2px rgba(20, 16, 39, 0.3);
+    }
+
+    nav p {
+        font-size: 20px;
+        font-weight: 600;
+        transition: 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+            transition: 0.2s ease;
+            transform: translateY(-4px);
+        }
+    }
+</style>
+<body>
+    <nav>
+        <p id="cur">Currency Converter</p>
+        <p id="pok">Pokemon Generator</p>
+        <p id="quo">Quote Generator</p>
+    </nav>
+    <h1 class="main-1">Currency Converter</h1>
+    <main class="currency">
+        <h1>Currency Converter</h1>
+        <input type="number" placeholder="Enter a number..">
+        <div class="container">
+            <div class="first-value">
+                <img src="https://flagcdn.com/w640/us.png" class="first-country">
+                <select class="first">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="IDR">IDR</option>
+                    <option value="KZT">KZT</option>
+                    <option value="RUB">RUB</option>
+                    <option value="GBP">GBP</option>
+                    <option value="AED">AED</option>
+                </select>
+            </div>
+            <img src="images/icons8-convert-50.png" class="convert-icon">
+            <div class="second-value">
+                <img src="https://flagcdn.com/w640/id.png" class="second-country">
+                <select class="second">
+                    <option value="IDR">IDR</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="KZT">KZT</option>
+                    <option value="RUB">RUB</option>
+                    <option value="GBP">GBP</option>
+                    <option value="AED">AED</option>
+                </select>
+            </div>
+        </div>
+        <div class="output">
+            <p class="output-text">0.00 = 0.00</p>
+        </div>
+        <button class="btn-convert">Convert</button>
+    </main>
+    <h1 class="main-1">Pokemon Generator</h1>
+    <main class="pokemon">
+        <div class="main-container">
+        </div>
+        <button class="pokemon-btn">Generate Pokemon</button>
+    </main>
+    <h1 class="main-1">Quote Generator</h1>
+    <main class="quote">
+        <div class="container">
+        </div>
+        <button class="quote-btn">Get Quote</button>
+    </main>
+    <script>
+        const quo = document.querySelector('.quote')
+        const poke = document.querySelector('.pokemon')
+        const cur = document.querySelector('.currency')
+
+        function pokemon() {
+            const url = 'https://pokeapi.co/api/v2/pokemon/'
+            const btn = document.querySelector('.pokemon-btn')
+            const mainContainer = document.querySelector('.main-container')
+
+            async function getPokemon() {
+                const pokemons = ['bulbasaur', 'ivysaur', 'venusaur', 'charmander', 'charmeleon', 'charizard', 'squirtle', 'wartortle', 'blastoise', 'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'beedrill', 'pidgey', 'pidgeotto', 'pidgeot', 'rattata', 'raticate']
+                const randomPokemon = pokemons[Math.floor(Math.random()*pokemons.length)]
+                const data = await fetch(url + randomPokemon)
+                const response = await data.json()
+                mainContainer.innerHTML = `
+                <div class="hp">
+                    <p class="hp-text">hp ${response.stats[0].base_stat}</p>
+                </div>
+                <div class="img-container">
+                    <img src="${response.sprites.front_default}">
+                </div>
+                <h3 class="name">${response.name}</h3>
+                <div class="twopi">
+                    <p class="first">${response.types[0].type.name}</p>
+                    ${response.types[1] ? `<p class="second">${response.types[1].type.name}</p>` : ''}
+                </div>
+                <div class="stats">
+                    <div class="attack">
+                        <p class="num1">${response.stats[1].base_stat}</p>
+                        <p class="attack-text">Attack</p>
+                    </div>
+                    <div class="defense">
+                        <p class="num2">${response.stats[2].base_stat}</p>
+                        <p class="defense-text">Defense</p>
+                    </div>
+                    <div class="speed">
+                        <p class="num3">${response.stats[5].base_stat}</p>
+                        <p class="speed-text">Speed</p>
+                    </div>
+                </div>
+                `
+            }
+
+            btn.addEventListener('click', getPokemon)
+        }
+
+        function currency() {
+            const outputText = document.querySelector('.output-text')
+            const first = document.querySelector('.first')
+            const second = document.querySelector('.second')
+            const firstCountry = document.querySelector('.first-country')
+            const secondCountry = document.querySelector('.second-country')
+            const btn = document.querySelector('.btn-convert')
+            const input = document.querySelector('input')
+            const convertBtn = document.querySelector('.convert-icon')
+
+            const currencyToCountry = {
+                USD: 'us',
+                EUR: 'eu',
+                IDR: 'id',
+                KZT: 'kz',
+                RUB: 'ru',
+                GBP: 'gb',
+                AED: 'ae'
+            }
+
+            function updateFlags() {
+                const firstCode = currencyToCountry[first.value] || 'us'
+                const secondCode = currencyToCountry[second.value] || 'us'
+                firstCountry.src = `https://flagcdn.com/w640/${firstCode}.png`
+                secondCountry.src = `https://flagcdn.com/w640/${secondCode}.png`
+            }
+
+            async function getCurrency() {
+                const userNum = input.value.trim()
+
+                if (!userNum || isNaN(userNum)) {
+                    outputText.textContent = 'Please enter a number!'
+                    return
+                }
+
+                const fromCurrency = first.value
+                const toCurrency = second.value
+
+                const url = `https://v6.exchangerate-api.com/v6/1892bb92529604d33056a5d9/latest/${fromCurrency}`
+                const data = await fetch(url)
+                const response = await data.json()
+
+                const rate = response.conversion_rates[toCurrency]
+                const total = (userNum * rate).toFixed(2)
+
+                outputText.textContent = `${userNum} ${fromCurrency} = ${total} ${toCurrency}`
+            }
+
+            btn.addEventListener('click', getCurrency)
+
+            first.addEventListener('change', updateFlags)
+            second.addEventListener('change', updateFlags)
+
+            convertBtn.addEventListener('click', function() {
+                const temp = first.value
+                first.value = second.value
+                second.value = temp
+                updateFlags()
+            })
+        }
+
+        function quote() {
+            const btn = document.querySelector('.quote-btn')
+            const container = document.querySelector('.container')
+            const url = 'https://dummyjson.com/quotes/random'
+
+            async function getQuote() {
+                const data = await fetch(url)
+                const response = await data.json()
+                container.innerHTML = `
+                <p>${response.quote}</p>
+                <h4>${response.author}</h4>
+                `
+            }
+
+            btn.addEventListener('click', getQuote)
+        }
+
+        const p = document.getElementById('pok')
+        const c = document.getElementById('cur')
+        const q = document.getElementById('quo')
+
+        p.addEventListener('click', function() {
+            poke.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            })
+        })
+
+        c.addEventListener('click', function() {
+            cur.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            })
+        })
+
+        q.addEventListener('click', function() {
+            quo.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            })
+        })
+
+        pokemon()
+        currency()
+        quote()
+    </script>
+</body>
+</html>
